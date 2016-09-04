@@ -60,8 +60,8 @@ public class Pantalla {
 		frmThe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmThe.getContentPane().setLayout(null);
 
-		while(!Game.EstaTerminado)
-		{
+	//	while(!Game.EstaTerminado)
+		//{
 			MostrarTablero(Game);
 			
 			frmThe.getContentPane().addKeyListener(new KeyAdapter() {
@@ -89,7 +89,7 @@ public class Pantalla {
 			Game.HayMovimientos(); // Revisa si hay movimientos disponibles
 			Game.Gano(); // Revisa si gano
 			Game.RandomNumero(); // Ingresa un numero [2 o 4] en el tablero Aleatoriamente.
-		}
+	//	}
 			
 
 			if(Game.Gano){

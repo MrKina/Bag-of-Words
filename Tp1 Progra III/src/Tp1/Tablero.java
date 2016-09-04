@@ -55,16 +55,18 @@ public class Tablero {
 	}
 	/*
 	public void MoverIzquierda() {
-		for (int y = 0; y < tablero.length; y++) {
-			for (int x = tablero.length; x >= 0; x--) {
-				if (tablero[x][y] == tablero[x - 1][y] || tablero[x-1][y]==0) {
+		for (int y = 0; y < tablero.length; y++)
+		 {
+			for (int x = tablero.length; x >= 0; x--)
+			 {
+				if (tablero[x][y] == tablero[x - 1][y] || tablero[x-1][y]==0)
+				 {
 					tablero[x - 1][y] = +tablero[x][y];
 					tablero[x][y] = 0;
 				}
-				
-				}
-
 			}
+
+		 }
 		}
 	*/
 	
