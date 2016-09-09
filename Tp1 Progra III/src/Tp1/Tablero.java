@@ -8,7 +8,6 @@ public class Tablero {
 	int tablero[][] = new int[4][4];
 	int Score = 0;
 	int Movimiento = 0;
-	boolean EstaTerminado = false;
 	boolean Gano = false;
 
 	void tablero() {
@@ -251,37 +250,42 @@ public class Tablero {
 		return Cadena;
 	}
 
-	public void Gano() {
-		for (int y = 0; y < tablero.length-1; y++) {
-			for (int x = 0; x < tablero.length-1; x++) {
+	public boolean Gano() {
+		for (int y = 0; y < tablero.length; y++) {
+			for (int x = 0; x < tablero.length; x++) {
 				if (tablero[x][y] == 2048) {
-					Gano = true;
-					EstaTerminado = true;
-				}
+					return true;
+					}
 			}
 		}
+		return false;
 	}
 
-	public void HayMovimientos() {
+	public boolean HayMovimientos() {
 		for (int y = 0; y < tablero.length-1; y++) {
 			for (int x = 0; x < tablero.length-1; x++) {
 				if (tablero[x][y] == tablero[x + 1][y]) {
-					EstaTerminado = false;
-					return;
+					return true;
 				}
 			}
 		}
 		for (int x = 0; x < tablero.length-1; x++) {
 			for (int y = 0; y < tablero.length-1; y++) {
 				if (tablero[x][y] == tablero[x][y + 1]) {
-					EstaTerminado = false;
-					return;
+					return true;
 				}
 			}
 		}
-
-		EstaTerminado = true;
-		return;
+		
+		for (int x = 0; x < tablero.length; x++) {
+			for (int y = 0; y < tablero.length; y++) {
+				if (tablero[x][y] == 0) {
+					return true;
+				}
+			}
+		}
+					
+		return false;
 	}
 
 	public void SetTablero(int x, int y, int valor) {

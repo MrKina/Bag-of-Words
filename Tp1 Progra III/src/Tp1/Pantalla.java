@@ -13,9 +13,9 @@ import javax.swing.SwingConstants;
 import java.awt.event.KeyAdapter;
 import javax.swing.JTextField;
 import javax.swing.JEditorPane;
-import javax.swing.JTextPane;
-import java.awt.Component;
 import java.awt.Cursor;
+import javax.swing.JTextPane;
+import javax.swing.JSlider;
 
 public class Pantalla {
 
@@ -40,6 +40,8 @@ public class Pantalla {
 	private JLabel label_3;
 	private JLabel label;
 	private JLabel label_10;
+	private JTextPane txtpnPerdisteGil;
+	private JTextPane txtpnPerdisteGil2;
 
 	/**
 	 * Launch the application.
@@ -72,7 +74,6 @@ public class Pantalla {
 		Tablero Game = new Tablero();
 
 		Game.inicializarTablero();
-		Game.MostrarMatriz();
 
 		frmThe = new JFrame();
 		frmThe.addKeyListener(new KeyAdapter() {
@@ -87,7 +88,7 @@ public class Pantalla {
 					Verificaciones(Game);
 					Repaint(Game);
 					System.out.println("Arriba!");
-					
+
 					break;
 				case KeyEvent.VK_DOWN:
 					//////
@@ -106,13 +107,12 @@ public class Pantalla {
 					break;
 				case KeyEvent.VK_RIGHT:
 					//////
+
 					Game.MoverDerecha();
 					Game.MostrarMatriz();
 					Verificaciones(Game);
 					Repaint(Game);
-					
 					System.out.println("Derecha!");
-					Verificaciones(Game);
 					break;
 
 				}
@@ -121,7 +121,7 @@ public class Pantalla {
 		frmThe.getContentPane().setBackground(Color.ORANGE);
 		frmThe.getContentPane().setForeground(Color.WHITE);
 		frmThe.setTitle("2048 - The Game");
-		frmThe.setBounds(100, 100, 347, 438);
+		frmThe.setBounds(100, 100, 330, 438);
 		frmThe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		MostrarTablero(Game);
@@ -131,9 +131,16 @@ public class Pantalla {
 	//////////////////// FIN JUEGO////////////////////////////////
 
 	private void Verificaciones(Tablero Game) {
-		Game.HayMovimientos();
-		Game.Gano();
+		if(Game.HayMovimientos()==false){
+			txtpnPerdisteGil2.setVisible(true);
+		}
+		if(Game.Gano == true)
+		{
+			
+		}
+
 		Game.RandomNumero();
+		Game.MostrarMatriz();
 	}
 
 	private void MostrarTablero(Tablero Game) {
@@ -144,14 +151,20 @@ public class Pantalla {
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 22));
 		lblNewLabel.setBackground(Color.WHITE);
+		if (Game.get(0, 0) == 0) {
+			lblNewLabel.setVisible(false);
+		}
 		frmThe.getContentPane().add(lblNewLabel);
-		
+
 		label = new JLabel(Game.toString(1, 0));
 		label.setBounds(88, 40, 68, 72);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setForeground(Color.WHITE);
 		label.setFont(new Font("Arial", Font.BOLD, 22));
 		label.setBackground(Color.WHITE);
+		if (Game.get(1, 0) == 0) {
+			label.setVisible(false);
+		}
 		frmThe.getContentPane().add(label);
 
 		label_1 = new JLabel(Game.toString(2, 0));
@@ -160,6 +173,9 @@ public class Pantalla {
 		label_1.setForeground(Color.WHITE);
 		label_1.setFont(new Font("Arial", Font.BOLD, 22));
 		label_1.setBackground(Color.WHITE);
+		if (Game.get(2, 0) == 0) {
+			label_1.setVisible(false);
+		}
 		frmThe.getContentPane().add(label_1);
 
 		label_2 = new JLabel(Game.toString(3, 0));
@@ -168,6 +184,9 @@ public class Pantalla {
 		label_2.setForeground(Color.WHITE);
 		label_2.setFont(new Font("Arial", Font.BOLD, 22));
 		label_2.setBackground(Color.WHITE);
+		if (Game.get(3, 0) == 0) {
+			label_2.setVisible(false);
+		}
 		frmThe.getContentPane().add(label_2);
 
 		label_3 = new JLabel(Game.toString(0, 1));
@@ -176,6 +195,9 @@ public class Pantalla {
 		label_3.setForeground(Color.WHITE);
 		label_3.setFont(new Font("Arial", Font.BOLD, 22));
 		label_3.setBackground(Color.WHITE);
+		if (Game.get(0, 1) == 0) {
+			label_3.setVisible(false);
+		}
 		frmThe.getContentPane().add(label_3);
 
 		label_4 = new JLabel(Game.toString(1, 1));
@@ -184,6 +206,9 @@ public class Pantalla {
 		label_4.setForeground(Color.WHITE);
 		label_4.setFont(new Font("Arial", Font.BOLD, 22));
 		label_4.setBackground(Color.WHITE);
+		if (Game.get(1, 1) == 0) {
+			label_4.setVisible(false);
+		}
 		frmThe.getContentPane().add(label_4);
 
 		label_5 = new JLabel(Game.toString(2, 1));
@@ -192,6 +217,9 @@ public class Pantalla {
 		label_5.setForeground(Color.WHITE);
 		label_5.setFont(new Font("Arial", Font.BOLD, 22));
 		label_5.setBackground(Color.WHITE);
+		if (Game.get(2, 1) == 0) {
+			label_5.setVisible(false);
+		}
 		frmThe.getContentPane().add(label_5);
 
 		label_6 = new JLabel(Game.toString(3, 1));
@@ -200,6 +228,9 @@ public class Pantalla {
 		label_6.setForeground(Color.WHITE);
 		label_6.setFont(new Font("Arial", Font.BOLD, 22));
 		label_6.setBackground(Color.WHITE);
+		if (Game.get(3, 1) == 0) {
+			label_6.setVisible(false);
+		}
 		frmThe.getContentPane().add(label_6);
 
 		label_7 = new JLabel(Game.toString(0, 2));
@@ -208,6 +239,9 @@ public class Pantalla {
 		label_7.setForeground(Color.WHITE);
 		label_7.setFont(new Font("Arial", Font.BOLD, 22));
 		label_7.setBackground(Color.WHITE);
+		if (Game.get(0, 2) == 0) {
+			label_7.setVisible(false);
+		}
 		frmThe.getContentPane().add(label_7);
 
 		label_8 = new JLabel(Game.toString(1, 2));
@@ -216,6 +250,9 @@ public class Pantalla {
 		label_8.setForeground(Color.WHITE);
 		label_8.setFont(new Font("Arial", Font.BOLD, 22));
 		label_8.setBackground(Color.WHITE);
+		if (Game.get(1, 2) == 0) {
+			label_8.setVisible(false);
+		}
 		frmThe.getContentPane().add(label_8);
 
 		label_9 = new JLabel(Game.toString(2, 2));
@@ -224,6 +261,9 @@ public class Pantalla {
 		label_9.setForeground(Color.WHITE);
 		label_9.setFont(new Font("Arial", Font.BOLD, 22));
 		label_9.setBackground(Color.WHITE);
+		if (Game.get(2, 2) == 0) {
+			label_9.setVisible(false);
+		}
 		frmThe.getContentPane().add(label_9);
 
 		label_10 = new JLabel(Game.toString(3, 2));
@@ -232,6 +272,9 @@ public class Pantalla {
 		label_10.setForeground(Color.WHITE);
 		label_10.setFont(new Font("Arial", Font.BOLD, 22));
 		label_10.setBackground(Color.WHITE);
+		if (Game.get(3, 2) == 0) {
+			label_10.setVisible(false);
+		}
 		frmThe.getContentPane().add(label_10);
 
 		label_11 = new JLabel(Game.toString(0, 3));
@@ -240,6 +283,9 @@ public class Pantalla {
 		label_11.setForeground(Color.WHITE);
 		label_11.setFont(new Font("Arial", Font.BOLD, 22));
 		label_11.setBackground(Color.WHITE);
+		if (Game.get(0, 3) == 0) {
+			label_11.setVisible(false);
+		}
 		frmThe.getContentPane().add(label_11);
 
 		label_12 = new JLabel(Game.toString(1, 3));
@@ -248,6 +294,9 @@ public class Pantalla {
 		label_12.setForeground(Color.WHITE);
 		label_12.setFont(new Font("Arial", Font.BOLD, 22));
 		label_12.setBackground(Color.WHITE);
+		if (Game.get(1, 3) == 0) {
+			label_12.setVisible(false);
+		}
 		frmThe.getContentPane().add(label_12);
 
 		label_13 = new JLabel(Game.toString(2, 3));
@@ -256,6 +305,9 @@ public class Pantalla {
 		label_13.setForeground(Color.WHITE);
 		label_13.setFont(new Font("Arial", Font.BOLD, 22));
 		label_13.setBackground(Color.WHITE);
+		if (Game.get(2, 3) == 0) {
+			label_13.setVisible(false);
+		}
 		frmThe.getContentPane().add(label_13);
 
 		label_14 = new JLabel(Game.toString(3, 3));
@@ -264,6 +316,9 @@ public class Pantalla {
 		label_14.setForeground(Color.WHITE);
 		label_14.setFont(new Font("Arial", Font.BOLD, 22));
 		label_14.setBackground(Color.WHITE);
+		if (Game.get(3, 3) == 0) {
+			label_14.setVisible(false);
+		}
 		frmThe.getContentPane().add(label_14);
 
 		frmThe.getContentPane().setLayout(null);
@@ -384,7 +439,6 @@ public class Pantalla {
 		textField_1.setColumns(10);
 		frmThe.getContentPane().add(textField_1);
 
-		// No tocar
 		txtScore = new JEditorPane();
 		txtScore.setFocusable(false);
 		txtScore.setBackground(Color.ORANGE);
@@ -403,28 +457,18 @@ public class Pantalla {
 		dtrpnMove.setBounds(235, 13, 68, 26);
 		frmThe.getContentPane().add(dtrpnMove);
 		
-		JEditorPane dtrpnGanaste = new JEditorPane();
-		dtrpnGanaste.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
-		dtrpnGanaste.setText("Ganaste ! ! !");
-		dtrpnGanaste.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 26));
-		dtrpnGanaste.setFocusable(false);
-		dtrpnGanaste.setEditable(false);
-		dtrpnGanaste.setBackground(Color.ORANGE);
-		dtrpnGanaste.setBounds(88, 368, 215, 43);
-		dtrpnGanaste.setVisible(false);
-		frmThe.getContentPane().add(dtrpnGanaste);
+		txtpnPerdisteGil2 = new JTextPane();
+		txtpnPerdisteGil2.setSelectionColor(Color.RED);
 		
-		JEditorPane dtrpnPerdiste = new JEditorPane();
-		dtrpnPerdiste.setForeground(Color.RED);
-		dtrpnPerdiste.setText("Perdiste ! ! !");
-		dtrpnPerdiste.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 26));
-		dtrpnPerdiste.setFocusable(false);
-		dtrpnPerdiste.setEditable(false);
-		dtrpnPerdiste.setBackground(Color.ORANGE);
-		dtrpnPerdiste.setBounds(88, 368, 215, 43);
-		dtrpnPerdiste.setVisible(false);
-		frmThe.getContentPane().add(dtrpnPerdiste);
-
+		txtpnPerdisteGil2.setForeground(Color.RED);
+		txtpnPerdisteGil2.setFont(new Font("Tahoma", Font.PLAIN, 34));
+		txtpnPerdisteGil2.setEnabled(false);
+		txtpnPerdisteGil2.setEditable(false);
+		txtpnPerdisteGil2.setBackground(Color.ORANGE);
+		txtpnPerdisteGil2.setText("PERDISTE GIL!");
+		txtpnPerdisteGil2.setVisible(false);
+		txtpnPerdisteGil2.setBounds(49, 365, 263, 46);
+		frmThe.getContentPane().add(txtpnPerdisteGil2);
 	}
 
 	private void Repaint(Tablero Game) {
@@ -446,110 +490,96 @@ public class Pantalla {
 		label_14.setText(Game.toString(3, 3));
 		textField.setText(Game.toString(Game.Score));
 		textField_1.setText(Game.toString(Game.Movimiento));
-		if (Game.get(0, 0)==0){
+
+		if (Game.get(0, 0) == 0) {
 			lblNewLabel.setVisible(false);
-		}
-		else{
+		} else {
 			lblNewLabel.setVisible(true);
 		}
-		if(Game.get(1, 0)==0){
+		if (Game.get(1, 0) == 0) {
 			label.setVisible(false);
-		}
-		else{
+		} else {
 			label.setVisible(true);
-		}	
-		if(Game.get(2, 0)==0){
-			label_1.setVisible(false);
 		}
-		else{
+		if (Game.get(2, 0) == 0) {
+			label_1.setVisible(false);
+		} else {
 			label_1.setVisible(true);
 		}
-		if(Game.get(3, 0)==0){
+		if (Game.get(3, 0) == 0) {
 			label_2.setVisible(false);
-		}
-		else{
+		} else {
 			label_2.setVisible(true);
 		}
-		if(Game.get(0, 1)==0){
+		if (Game.get(0, 1) == 0) {
 			label_3.setVisible(false);
-		}
-		else{
+		} else {
 			label_3.setVisible(true);
 		}
-		if(Game.get(1, 1)==0){
+		if (Game.get(1, 1) == 0) {
 			label_4.setVisible(false);
-		}
-		else{
+		} else {
 			label_4.setVisible(true);
 		}
-		if(Game.get(2, 1)==0){
+		if (Game.get(2, 1) == 0) {
 			label_5.setVisible(false);
-		}
-		else{
+		} else {
 			label_5.setVisible(true);
 		}
-		if(Game.get(3, 1)==0){
+		if (Game.get(3, 1) == 0) {
 			label_6.setVisible(false);
-		}
-		else{
+		} else {
 			label_6.setVisible(true);
 		}
-		
-		if(Game.get(0, 2)==0){
+
+		if (Game.get(0, 2) == 0) {
 			label_7.setVisible(false);
-		}
-		else{
+		} else {
 			label_7.setVisible(true);
 		}
-		if(Game.get(1, 2)==0){
+		if (Game.get(1, 2) == 0) {
 			label_8.setVisible(false);
-		}
-		else{
+		} else {
 			label_8.setVisible(true);
 		}
-		if(Game.get(2, 2)==0){
+		if (Game.get(2, 2) == 0) {
 			label_9.setVisible(false);
-		}
-		else{
+		} else {
 			label_9.setVisible(true);
 		}
-		if(Game.get(3, 2)==0){
+		if (Game.get(3, 2) == 0) {
 			label_10.setVisible(false);
-		}
-		else{
+		} else {
 			label_10.setVisible(true);
 		}
-		
-		if(Game.get(0, 3)==0){
+
+		if (Game.get(0, 3) == 0) {
 			label_11.setVisible(false);
-		}
-		else{
+		} else {
 			label_11.setVisible(true);
 		}
-		if(Game.get(1, 3)==0){
+		if (Game.get(1, 3) == 0) {
 			label_12.setVisible(false);
-		}
-		else{
+		} else {
 			label_12.setVisible(true);
 		}
-		if(Game.get(2,3)==0){
+		if (Game.get(2, 3) == 0) {
 			label_13.setVisible(false);
-		}
-		else{
+		} else {
 			label_13.setVisible(true);
 		}
-		if(Game.get(3, 3)==0){
+		if (Game.get(3, 3) == 0) {
 			label_14.setVisible(false);
-		}
-		else{
+		} else {
 			label_14.setVisible(true);
 		}
-		
+
 	}
 
 	public String getLblNewLabelText() {
 		return lblNewLabel.getText();
 	}
+
 	public void setLblNewLabelText(String text) {
 		lblNewLabel.setText(text);
 	}
@@ -557,116 +587,135 @@ public class Pantalla {
 	public String getLabel() {
 		return label.getText();
 	}
+
 	public void setlabel(String text) {
 		label.setText(text);
 	}
-	
+
 	public String getLabel_1() {
 		return label_1.getText();
 	}
+
 	public void setlabel_1(String text) {
 		label_1.setText(text);
 	}
-	
+
 	public String getLabel_2() {
 		return label_2.getText();
 	}
+
 	public void setlabel_2(String text) {
 		label_2.setText(text);
 	}
-	
+
 	public String getLabel_3() {
 		return label_3.getText();
 	}
+
 	public void setlabel_3(String text) {
 		label_3.setText(text);
 	}
-	
+
 	public String getLabel_4() {
 		return label_4.getText();
 	}
+
 	public void setlabel_4(String text) {
 		label_4.setText(text);
 	}
+
 	public String getLabel_5() {
 		return label_5.getText();
 	}
+
 	public void setlabel_5(String text) {
 		label_5.setText(text);
 	}
-	
+
 	public String getLabel_6() {
 		return label_6.getText();
 	}
+
 	public void setlabel_6(String text) {
 		label_6.setText(text);
 	}
-	
+
 	public String getLabel_7() {
 		return label_7.getText();
 	}
+
 	public void setlabel_7(String text) {
 		label_7.setText(text);
 	}
-	
+
 	public String getLabel_8() {
 		return label_8.getText();
 	}
+
 	public void setlabel_8(String text) {
 		label_8.setText(text);
 	}
-	
+
 	public String getLabel_9() {
 		return label_9.getText();
 	}
+
 	public void setlabel_9(String text) {
 		label_9.setText(text);
 	}
-	
+
 	public String getLabel_10() {
 		return label_10.getText();
 	}
+
 	public void setlabel_10(String text) {
 		label_10.setText(text);
 	}
-	
+
 	public String getLabel_11() {
 		return label_11.getText();
 	}
+
 	public void setlabel_11(String text) {
 		label_11.setText(text);
 	}
-	
+
 	public String getLabel_12() {
 		return label_12.getText();
 	}
+
 	public void setlabel_12(String text) {
 		label_12.setText(text);
 	}
-	
+
 	public String getLabel_13() {
 		return label_13.getText();
 	}
+
 	public void setlabel_13(String text) {
 		label_13.setText(text);
 	}
+
 	public String getLabel_14() {
 		return label_14.getText();
 	}
+
 	public void setlabel_14(String text) {
 		label_14.setText(text);
 	}
-	
+
 	public String getLabel_15() {
 		return label_15.getText();
 	}
+
 	public void setlabel_15(String text) {
 		label_15.setText(text);
 	}
-	
+
 	public JTextField getTextField() {
 		return textField;
 	}
+
 	public JTextField getTextField_1() {
 		return textField_1;
 	}
