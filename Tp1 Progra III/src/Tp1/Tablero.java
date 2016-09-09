@@ -42,7 +42,7 @@ public class Tablero {
 	void RandomNumero() {
 		Random r = new Random();
 
-		for (int i = 0; i == 1; i++) {
+		for (int i = 0; i < 1; i++) {
 			int x = r.nextInt(4);
 			int y = r.nextInt(4);
 			int randomNum = 2 + (int) (Math.random() * 3);
@@ -95,7 +95,6 @@ public class Tablero {
 		}
 		for (int x = 0; x < tablero.length; x++) {
 			tablero[x][y] = (int) Auxiliar.get(x);
-
 		}
 	}
 
@@ -103,7 +102,7 @@ public class Tablero {
 		ArrayList<Integer> Auxiliar = new ArrayList<Integer>();
 		for (int y = 0; y < tablero.length; y++) {
 			Auxiliar.clear();
-			for (int x = 0; x < tablero.length; x++) {
+			for (int x = tablero.length - 1; x >= 0; x--) {
 				if (tablero[x][y] != 0) {
 					Auxiliar.add(tablero[x][y]);
 				}
@@ -112,38 +111,127 @@ public class Tablero {
 		}
 
 		for (int y = 0; y < tablero.length; y++) {
-			for (int x = 0; x < tablero.length - 1; x++) {
-				if (tablero[x][y] == tablero[x + 1][y]) {
-					tablero[x][y] += tablero[x + 1][y];
-					tablero[x + 1][y] = 0;
+			for (int x = tablero.length - 1; x >= 1; x--) {
+				if (tablero[x][y] == tablero[x - 1][y]) {
+					tablero[x][y] += tablero[x - 1][y];
+					tablero[x - 1][y] = 0;
+				}
+			}
+		}
+
+		Auxiliar.clear();
+		for (int y = 0; y < tablero.length; y++) {
+			Auxiliar.clear();
+			for (int x = tablero.length - 1; x > -1; x--) {
+				if (tablero[x][y] != 0) {
+					Auxiliar.add(tablero[x][y]);
+				}
+			}
+			AlinearDerecha(y, Auxiliar);
+		}
+		Movimiento++;
+	}
+	private void AlinearDerecha(int y, ArrayList<Integer> Auxiliar) {
+		while (Auxiliar.size() < tablero.length) {
+			Auxiliar.add(0);
+		}
+		int Aux = 0;
+		for (int x = tablero.length - 1; x >= 0; x--) {
+			tablero[x][y] = (int) Auxiliar.get(Aux);
+			Aux++;
+		}
+	}
+
+	public void MoverArriba() {
+		ArrayList<Integer> Auxiliar = new ArrayList<Integer>();
+		for (int x = 0; x < tablero.length; x++) {
+			Auxiliar.clear();
+			for (int y = 0; y < tablero.length; y++) {
+				if (tablero[x][y] != 0) {
+					Auxiliar.add(tablero[x][y]);
+				}
+			}
+			AlinearArriba(x, Auxiliar);
+		}
+
+		for (int x = 0; x < tablero.length; x++) {
+			for (int y = 0; y < tablero.length - 1; y++) {
+				if (tablero[x][y] == tablero[x][y + 1]) {
+					Score = tablero[x][y] += tablero[x][y + 1];
+					tablero[x][y + 1] = 0;
 				}
 			}
 		}
 
 		Auxiliar.clear();
 
-		for (int y = 0; y < tablero.length; y++) {
+		for (int x = 0; x < tablero.length; x++) {
 			Auxiliar.clear();
-			for (int x = 0; x < tablero.length; x++) {
+			for (int y = 0; y < tablero.length; y++) {
 				if (tablero[x][y] != 0) {
 					Auxiliar.add(tablero[x][y]);
 				}
 			}
-			AlinearDerecha(y, Auxiliar);
+			AlinearArriba(x, Auxiliar);
 		}
+		Movimiento++;
 
 	}
-
-	private void AlinearDerecha(int y, ArrayList<Integer> Auxiliar) {
+	private void AlinearArriba(int x, ArrayList<Integer> Auxiliar) {
 		while (Auxiliar.size() <= tablero.length) {
 			Auxiliar.add(0);
 		}
-		for (int x = 0; x < tablero.length; x++) {
-			tablero[x][y] = (int) Auxiliar.get(x);
+		for (int y = 0; y < tablero.length; y++) {
+			tablero[x][y] = (int) Auxiliar.get(y);
 
 		}
 	}
+	
+	public void MoverAbajo() {
+		ArrayList<Integer> Auxiliar = new ArrayList<Integer>();
+		for (int x = 0; x < tablero.length; x++) {
+			Auxiliar.clear();
+			for (int y = tablero.length - 1; y >= 0; y--) {
+				if (tablero[x][y] != 0) {
+					Auxiliar.add(tablero[x][y]);
+				}
+			}
+			AlinearAbajo(x, Auxiliar);
+		}
 
+		for (int x = 0; x < tablero.length; x++) {
+			for (int y = tablero.length - 1; y >= 1; y--) {
+				if (tablero[x][y] == tablero[x][y-1]) {
+					tablero[x][y] += tablero[x][y-1];
+					tablero[x][y-1] = 0;
+				}
+			}
+		}
+
+		Auxiliar.clear();
+		for (int x = 0; x < tablero.length; x++) {
+			Auxiliar.clear();
+			for (int y = tablero.length - 1; y > -1; y--) {
+				if (tablero[x][y] != 0) {
+					Auxiliar.add(tablero[x][y]);
+				}
+			}
+			AlinearAbajo(x, Auxiliar);
+		}
+		Movimiento++;
+	}
+	private void AlinearAbajo(int x, ArrayList<Integer> Auxiliar) {
+		while (Auxiliar.size() < tablero.length) {
+			Auxiliar.add(0);
+		}
+		int Aux = 0;
+		for (int y = tablero.length - 1; y >= 0; y--) {
+			tablero[x][y] = (int) Auxiliar.get(Aux);
+			Aux++;
+		}
+	}
+	
+	
 	public void MostrarMatriz() {
 		for (int y = 0; y < tablero.length; y++) {
 			for (int x = 0; x < tablero.length; x++) {
@@ -157,16 +245,15 @@ public class Tablero {
 		String Cadena = String.valueOf(tablero[x][y]);
 		return Cadena;
 	}
-	
+
 	public String toString(int Score) {
 		String Cadena = String.valueOf(Score);
 		return Cadena;
 	}
-	
 
 	public void Gano() {
-		for (int y = 0; y < tablero.length; y++) {
-			for (int x = 0; x < tablero.length; x++) {
+		for (int y = 0; y < tablero.length-1; y++) {
+			for (int x = 0; x < tablero.length-1; x++) {
 				if (tablero[x][y] == 2048) {
 					Gano = true;
 					EstaTerminado = true;
@@ -176,16 +263,16 @@ public class Tablero {
 	}
 
 	public void HayMovimientos() {
-		for (int y = 0; y < tablero.length; y++) {
-			for (int x = 0; x < tablero.length; x++) {
+		for (int y = 0; y < tablero.length-1; y++) {
+			for (int x = 0; x < tablero.length-1; x++) {
 				if (tablero[x][y] == tablero[x + 1][y]) {
 					EstaTerminado = false;
 					return;
 				}
 			}
 		}
-		for (int x = 0; x < tablero.length; x++) {
-			for (int y = 0; y < tablero.length; y++) {
+		for (int x = 0; x < tablero.length-1; x++) {
+			for (int y = 0; y < tablero.length-1; y++) {
 				if (tablero[x][y] == tablero[x][y + 1]) {
 					EstaTerminado = false;
 					return;

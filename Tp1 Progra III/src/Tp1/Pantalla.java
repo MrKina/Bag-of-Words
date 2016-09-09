@@ -13,6 +13,9 @@ import javax.swing.SwingConstants;
 import java.awt.event.KeyAdapter;
 import javax.swing.JTextField;
 import javax.swing.JEditorPane;
+import javax.swing.JTextPane;
+import java.awt.Component;
+import java.awt.Cursor;
 
 public class Pantalla {
 
@@ -79,15 +82,20 @@ public class Pantalla {
 				switch (keyCode) {
 				case KeyEvent.VK_UP:
 					////////
-
-					System.out.println("Arriba!");
+					Game.MoverArriba();
+					Game.MostrarMatriz();
 					Verificaciones(Game);
+					Repaint(Game);
+					System.out.println("Arriba!");
+					
 					break;
 				case KeyEvent.VK_DOWN:
 					//////
-
-					System.out.println("Abajo!");
+					Game.MoverAbajo();
+					Game.MostrarMatriz();
 					Verificaciones(Game);
+					Repaint(Game);
+					System.out.println("Abajo!");
 					break;
 				case KeyEvent.VK_LEFT:
 					System.out.println("Izquierda!");
@@ -98,7 +106,11 @@ public class Pantalla {
 					break;
 				case KeyEvent.VK_RIGHT:
 					//////
-
+					Game.MoverDerecha();
+					Game.MostrarMatriz();
+					Verificaciones(Game);
+					Repaint(Game);
+					
 					System.out.println("Derecha!");
 					Verificaciones(Game);
 					break;
@@ -109,7 +121,7 @@ public class Pantalla {
 		frmThe.getContentPane().setBackground(Color.ORANGE);
 		frmThe.getContentPane().setForeground(Color.WHITE);
 		frmThe.setTitle("2048 - The Game");
-		frmThe.setBounds(100, 100, 341, 408);
+		frmThe.setBounds(100, 100, 347, 438);
 		frmThe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		MostrarTablero(Game);
@@ -254,14 +266,6 @@ public class Pantalla {
 		label_14.setBackground(Color.WHITE);
 		frmThe.getContentPane().add(label_14);
 
-		label_15 = new JLabel(Game.toString(3, 3));
-		label_15.setBounds(244, 289, 68, 72);
-		label_15.setHorizontalAlignment(SwingConstants.CENTER);
-		label_15.setForeground(Color.WHITE);
-		label_15.setFont(new Font("Arial", Font.BOLD, 22));
-		label_15.setBackground(Color.WHITE);
-		frmThe.getContentPane().add(label_15);
-
 		frmThe.getContentPane().setLayout(null);
 
 		JPanel panel = new JPanel();
@@ -398,6 +402,28 @@ public class Pantalla {
 		dtrpnMove.setBackground(Color.ORANGE);
 		dtrpnMove.setBounds(235, 13, 68, 26);
 		frmThe.getContentPane().add(dtrpnMove);
+		
+		JEditorPane dtrpnGanaste = new JEditorPane();
+		dtrpnGanaste.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
+		dtrpnGanaste.setText("Ganaste ! ! !");
+		dtrpnGanaste.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 26));
+		dtrpnGanaste.setFocusable(false);
+		dtrpnGanaste.setEditable(false);
+		dtrpnGanaste.setBackground(Color.ORANGE);
+		dtrpnGanaste.setBounds(88, 368, 215, 43);
+		dtrpnGanaste.setVisible(false);
+		frmThe.getContentPane().add(dtrpnGanaste);
+		
+		JEditorPane dtrpnPerdiste = new JEditorPane();
+		dtrpnPerdiste.setForeground(Color.RED);
+		dtrpnPerdiste.setText("Perdiste ! ! !");
+		dtrpnPerdiste.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 26));
+		dtrpnPerdiste.setFocusable(false);
+		dtrpnPerdiste.setEditable(false);
+		dtrpnPerdiste.setBackground(Color.ORANGE);
+		dtrpnPerdiste.setBounds(88, 368, 215, 43);
+		dtrpnPerdiste.setVisible(false);
+		frmThe.getContentPane().add(dtrpnPerdiste);
 
 	}
 
@@ -420,7 +446,105 @@ public class Pantalla {
 		label_14.setText(Game.toString(3, 3));
 		textField.setText(Game.toString(Game.Score));
 		textField_1.setText(Game.toString(Game.Movimiento));
-	
+		if (Game.get(0, 0)==0){
+			lblNewLabel.setVisible(false);
+		}
+		else{
+			lblNewLabel.setVisible(true);
+		}
+		if(Game.get(1, 0)==0){
+			label.setVisible(false);
+		}
+		else{
+			label.setVisible(true);
+		}	
+		if(Game.get(2, 0)==0){
+			label_1.setVisible(false);
+		}
+		else{
+			label_1.setVisible(true);
+		}
+		if(Game.get(3, 0)==0){
+			label_2.setVisible(false);
+		}
+		else{
+			label_2.setVisible(true);
+		}
+		if(Game.get(0, 1)==0){
+			label_3.setVisible(false);
+		}
+		else{
+			label_3.setVisible(true);
+		}
+		if(Game.get(1, 1)==0){
+			label_4.setVisible(false);
+		}
+		else{
+			label_4.setVisible(true);
+		}
+		if(Game.get(2, 1)==0){
+			label_5.setVisible(false);
+		}
+		else{
+			label_5.setVisible(true);
+		}
+		if(Game.get(3, 1)==0){
+			label_6.setVisible(false);
+		}
+		else{
+			label_6.setVisible(true);
+		}
+		
+		if(Game.get(0, 2)==0){
+			label_7.setVisible(false);
+		}
+		else{
+			label_7.setVisible(true);
+		}
+		if(Game.get(1, 2)==0){
+			label_8.setVisible(false);
+		}
+		else{
+			label_8.setVisible(true);
+		}
+		if(Game.get(2, 2)==0){
+			label_9.setVisible(false);
+		}
+		else{
+			label_9.setVisible(true);
+		}
+		if(Game.get(3, 2)==0){
+			label_10.setVisible(false);
+		}
+		else{
+			label_10.setVisible(true);
+		}
+		
+		if(Game.get(0, 3)==0){
+			label_11.setVisible(false);
+		}
+		else{
+			label_11.setVisible(true);
+		}
+		if(Game.get(1, 3)==0){
+			label_12.setVisible(false);
+		}
+		else{
+			label_12.setVisible(true);
+		}
+		if(Game.get(2,3)==0){
+			label_13.setVisible(false);
+		}
+		else{
+			label_13.setVisible(true);
+		}
+		if(Game.get(3, 3)==0){
+			label_14.setVisible(false);
+		}
+		else{
+			label_14.setVisible(true);
+		}
+		
 	}
 
 	public String getLblNewLabelText() {
