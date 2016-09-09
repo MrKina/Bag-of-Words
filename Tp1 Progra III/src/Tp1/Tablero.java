@@ -6,6 +6,8 @@ import java.util.Random;
 public class Tablero {
 
 	int tablero[][] = new int[4][4];
+	int Score = 0;
+	int Movimiento = 0;
 	boolean EstaTerminado = false;
 	boolean Gano = false;
 
@@ -67,7 +69,7 @@ public class Tablero {
 		for (int y = 0; y < tablero.length; y++) {
 			for (int x = 0; x < tablero.length - 1; x++) {
 				if (tablero[x][y] == tablero[x + 1][y]) {
-					tablero[x][y] += tablero[x + 1][y];
+					Score = tablero[x][y] += tablero[x + 1][y];
 					tablero[x + 1][y] = 0;
 				}
 			}
@@ -154,6 +156,12 @@ public class Tablero {
 		String Cadena = String.valueOf(tablero[x][y]);
 		return Cadena;
 	}
+	
+	public String toString(int Score) {
+		String Cadena = String.valueOf(Score);
+		return Cadena;
+	}
+	
 
 	public void Gano() {
 		for (int y = 0; y < tablero.length; y++) {
