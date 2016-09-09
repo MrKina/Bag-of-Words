@@ -86,6 +86,7 @@ public class Tablero {
 			}
 			AlinearIzquierda(y, Auxiliar);
 		}
+		Movimiento++;
 
 	}
 	private void AlinearIzquierda(int y, ArrayList<Integer> Auxiliar) {
