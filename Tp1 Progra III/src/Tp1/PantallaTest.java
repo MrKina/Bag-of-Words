@@ -9,6 +9,7 @@ public class PantallaTest {
 	@Test
 	public void test() {
 		Tablero Juego = new Tablero();
+		
 		Juego.SetTablero(0, 0, 16);
 		Juego.SetTablero(1, 0, 8);
 		Juego.SetTablero(2, 0, 2);
@@ -27,14 +28,13 @@ public class PantallaTest {
 		Juego.SetTablero(3, 3, 2);
 		
 		Juego.MostrarMatriz();
+		Juego.CopiarTablero();
+		Juego.MostrarMatrizCopiada();
 		
 		System.out.println("Hay Movimiento: " + Juego.HayMovimientos());
 		System.out.println("Gano?: " + Juego.Gano());
 		
-		
-		
-		
-
+			
 	}
 
 }

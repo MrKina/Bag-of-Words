@@ -72,9 +72,8 @@ public class Pantalla {
 	private void initialize() {
 
 		Tablero Game = new Tablero();
-
 		Game.inicializarTablero();
-
+		
 		frmThe = new JFrame();
 		frmThe.addKeyListener(new KeyAdapter() {
 			@Override
@@ -83,37 +82,34 @@ public class Pantalla {
 				switch (keyCode) {
 				case KeyEvent.VK_UP:
 					////////
-					Game.MoverArriba();
+					if(Game.MoverArriba()){
+						Verificaciones(Game);
+					}
 					Game.MostrarMatriz();
-					Verificaciones(Game);
 					Repaint(Game);
-					System.out.println("Arriba!");
-
 					break;
 				case KeyEvent.VK_DOWN:
 					//////
-					
-					Game.MoverAbajo();
+					if(Game.MoverAbajo()){
+						Verificaciones(Game);
+					}
 					Game.MostrarMatriz();
-					Verificaciones(Game);
 					Repaint(Game);
-					System.out.println("Abajo!");
 					break;
 				case KeyEvent.VK_LEFT:
-					System.out.println("Izquierda!");
-					Game.MoverIzquierda();
+					if(Game.MoverIzquierda()){
+						Verificaciones(Game);
+					}
 					Game.MostrarMatriz();
-					Verificaciones(Game);
 					Repaint(Game);
 					break;
 				case KeyEvent.VK_RIGHT:
 					//////
-
-					Game.MoverDerecha();
+					if(Game.MoverDerecha()){
+						Verificaciones(Game);
+					}
 					Game.MostrarMatriz();
-					Verificaciones(Game);
 					Repaint(Game);
-					System.out.println("Derecha!");
 					break;
 
 				}
@@ -132,18 +128,11 @@ public class Pantalla {
 	//////////////////// FIN JUEGO////////////////////////////////
 
 	private void Verificaciones(Tablero Game) {
-		/*if(Game.HayMovimientos()==false){
-			
-			System.out.println("Perdiste");
-			
-		}*/
 		if(Game.Gano == true)
 		{
 			System.out.println("Ganaste");
 		}
-
 		Game.RandomNumero();
-		Game.MostrarMatriz();
 	}
 
 	private void MostrarTablero(Tablero Game) {

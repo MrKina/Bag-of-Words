@@ -6,6 +6,7 @@ import java.util.Random;
 public class Tablero {
 
 	int tablero[][] = new int[4][4];
+	int Auxiliar[][] = new int[4][4];
 	int Score = 0;
 	int Movimiento = 0;
 	boolean Gano = false;
@@ -40,7 +41,6 @@ public class Tablero {
 
 	void RandomNumero() {
 		Random r = new Random();
-
 		for (int i = 0; i < 1; i++) {
 			int x = r.nextInt(4);
 			int y = r.nextInt(4);
@@ -53,7 +53,11 @@ public class Tablero {
 		}
 	}
 
-	public void MoverIzquierda() {
+	public boolean MoverIzquierda() {
+		CopiarTablero();
+		MostrarMatriz();
+		System.out.println(" ------------- ");
+		MostrarMatrizCopiada();
 		ArrayList<Integer> Auxiliar = new ArrayList<Integer>();
 		for (int y = 0; y < tablero.length; y++) {
 			Auxiliar.clear();
@@ -85,9 +89,19 @@ public class Tablero {
 			}
 			AlinearIzquierda(y, Auxiliar);
 		}
+		
+		MostrarMatriz();
+		System.out.println(" ------------- ");
+		MostrarMatrizCopiada();
+		if (equalsTablero()) {
+			System.out.println("ES IGUAL");
+			return false;
+		}
 		Movimiento++;
+		return true;
 
 	}
+
 	private void AlinearIzquierda(int y, ArrayList<Integer> Auxiliar) {
 		while (Auxiliar.size() <= tablero.length) {
 			Auxiliar.add(0);
@@ -97,7 +111,8 @@ public class Tablero {
 		}
 	}
 
-	public void MoverDerecha() {
+	public boolean MoverDerecha() {
+		CopiarTablero();
 		ArrayList<Integer> Auxiliar = new ArrayList<Integer>();
 		for (int y = 0; y < tablero.length; y++) {
 			Auxiliar.clear();
@@ -128,8 +143,15 @@ public class Tablero {
 			}
 			AlinearDerecha(y, Auxiliar);
 		}
+		if (equalsTablero()) {
+			System.out.println("ES IGUAL");
+			return false;
+		}
 		Movimiento++;
+		return true;
+
 	}
+
 	private void AlinearDerecha(int y, ArrayList<Integer> Auxiliar) {
 		while (Auxiliar.size() < tablero.length) {
 			Auxiliar.add(0);
@@ -141,7 +163,8 @@ public class Tablero {
 		}
 	}
 
-	public void MoverArriba() {
+	public boolean MoverArriba() {
+		CopiarTablero();
 		ArrayList<Integer> Auxiliar = new ArrayList<Integer>();
 		for (int x = 0; x < tablero.length; x++) {
 			Auxiliar.clear();
@@ -173,9 +196,15 @@ public class Tablero {
 			}
 			AlinearArriba(x, Auxiliar);
 		}
+		if (equalsTablero()) {
+			System.out.println("ES IGUAL");
+			return false;
+		}
 		Movimiento++;
+		return true;
 
 	}
+
 	private void AlinearArriba(int x, ArrayList<Integer> Auxiliar) {
 		while (Auxiliar.size() <= tablero.length) {
 			Auxiliar.add(0);
@@ -185,9 +214,10 @@ public class Tablero {
 
 		}
 	}
-	
-	public void MoverAbajo() {
+
+	public boolean MoverAbajo() {
 		ArrayList<Integer> Auxiliar = new ArrayList<Integer>();
+		CopiarTablero();
 		for (int x = 0; x < tablero.length; x++) {
 			Auxiliar.clear();
 			for (int y = tablero.length - 1; y >= 0; y--) {
@@ -200,9 +230,9 @@ public class Tablero {
 
 		for (int x = 0; x < tablero.length; x++) {
 			for (int y = tablero.length - 1; y >= 1; y--) {
-				if (tablero[x][y] == tablero[x][y-1]) {
-					tablero[x][y] += tablero[x][y-1];
-					tablero[x][y-1] = 0;
+				if (tablero[x][y] == tablero[x][y - 1]) {
+					tablero[x][y] += tablero[x][y - 1];
+					tablero[x][y - 1] = 0;
 				}
 			}
 		}
@@ -217,8 +247,15 @@ public class Tablero {
 			}
 			AlinearAbajo(x, Auxiliar);
 		}
+		if (equalsTablero()) {
+			System.out.println("ES IGUAL");
+			return false;
+		}
 		Movimiento++;
+		return true;
+
 	}
+
 	private void AlinearAbajo(int x, ArrayList<Integer> Auxiliar) {
 		while (Auxiliar.size() < tablero.length) {
 			Auxiliar.add(0);
@@ -229,12 +266,20 @@ public class Tablero {
 			Aux++;
 		}
 	}
-	
-	
+
 	public void MostrarMatriz() {
 		for (int y = 0; y < tablero.length; y++) {
 			for (int x = 0; x < tablero.length; x++) {
 				System.out.print(tablero[x][y] + " | ");
+			}
+			System.out.print("\n");
+		}
+	}
+
+	public void MostrarMatrizCopiada() {
+		for (int y = 0; y < Auxiliar.length; y++) {
+			for (int x = 0; x < Auxiliar.length; x++) {
+				System.out.print(Auxiliar[x][y] + " | ");
 			}
 			System.out.print("\n");
 		}
@@ -255,7 +300,7 @@ public class Tablero {
 			for (int x = 0; x < tablero.length; x++) {
 				if (tablero[x][y] == 2048) {
 					return true;
-					}
+				}
 			}
 		}
 		return false;
@@ -263,20 +308,20 @@ public class Tablero {
 
 	public boolean HayMovimientos() {
 		for (int y = 0; y < tablero.length; y++) {
-			for (int x = 0; x < tablero.length-1; x++) {
+			for (int x = 0; x < tablero.length - 1; x++) {
 				if (tablero[x][y] == tablero[x + 1][y]) {
 					return true;
 				}
 			}
 		}
 		for (int x = 0; x < tablero.length; x++) {
-			for (int y = 0; y < tablero.length-1; y++) {
+			for (int y = 0; y < tablero.length - 1; y++) {
 				if (tablero[x][y] == tablero[x][y + 1]) {
 					return true;
 				}
 			}
 		}
-		
+
 		for (int x = 0; x < tablero.length; x++) {
 			for (int y = 0; y < tablero.length; y++) {
 				if (tablero[x][y] == 0) {
@@ -284,7 +329,7 @@ public class Tablero {
 				}
 			}
 		}
-					
+
 		return false;
 	}
 
@@ -292,4 +337,25 @@ public class Tablero {
 		tablero[x][y] = valor;
 	}
 
+	public void CopiarTablero() {
+		for (int y = 0; y < tablero.length; y++) {
+			for (int x = 0; x < tablero.length; x++) {
+				Auxiliar[x][y] = tablero[x][y];
+			}
+		}
+		System.out.println("COPIADO");
+	}
+
+	private boolean equalsTablero() {
+		boolean Prueba = true;
+		for (int y = 0; y < tablero.length; y++) {
+			for (int x = 0; x < tablero.length; x++) {
+				if (Auxiliar[x][y] != tablero[x][y]) {
+					return false;
+				}
+			}
+		}
+		return Prueba;
+
+	}
 }
