@@ -72,7 +72,7 @@ public class Tablero {
 		for (int y = 0; y < tablero.length; y++) {
 			for (int x = 0; x < tablero.length - 1; x++) {
 				if (tablero[x][y] == tablero[x + 1][y]) {
-					Score = tablero[x][y] += tablero[x + 1][y];
+					Score += tablero[x][y] += tablero[x + 1][y];
 					tablero[x + 1][y] = 0;
 				}
 			}
@@ -127,7 +127,9 @@ public class Tablero {
 		for (int y = 0; y < tablero.length; y++) {
 			for (int x = tablero.length - 1; x >= 1; x--) {
 				if (tablero[x][y] == tablero[x - 1][y]) {
-					tablero[x][y] += tablero[x - 1][y];
+					
+					Score +=tablero[x][y] += tablero[x - 1][y];
+					
 					tablero[x - 1][y] = 0;
 				}
 			}
@@ -179,7 +181,7 @@ public class Tablero {
 		for (int x = 0; x < tablero.length; x++) {
 			for (int y = 0; y < tablero.length - 1; y++) {
 				if (tablero[x][y] == tablero[x][y + 1]) {
-					Score = tablero[x][y] += tablero[x][y + 1];
+					Score += tablero[x][y] += tablero[x][y + 1];
 					tablero[x][y + 1] = 0;
 				}
 			}
@@ -231,7 +233,7 @@ public class Tablero {
 		for (int x = 0; x < tablero.length; x++) {
 			for (int y = tablero.length - 1; y >= 1; y--) {
 				if (tablero[x][y] == tablero[x][y - 1]) {
-					tablero[x][y] += tablero[x][y - 1];
+					Score +=tablero[x][y] += tablero[x][y - 1];
 					tablero[x][y - 1] = 0;
 				}
 			}

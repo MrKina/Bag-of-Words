@@ -25,7 +25,7 @@ public class PantallaTest {
 		Juego.SetTablero(0, 3, 4);
 		Juego.SetTablero(1, 3, 2);
 		Juego.SetTablero(2, 3, 4);
-		Juego.SetTablero(3, 3, 2);
+		Juego.SetTablero(3, 3, 2048);
 		
 		Juego.MostrarMatriz();
 		Juego.CopiarTablero();

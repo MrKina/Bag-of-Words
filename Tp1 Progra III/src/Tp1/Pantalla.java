@@ -41,6 +41,7 @@ public class Pantalla {
 	private JLabel label;
 	private JLabel label_10;
 	private JTextPane txtpnPerdiste;
+	private JPanel panel;
 	
 
 	/**
@@ -83,7 +84,7 @@ public class Pantalla {
 				case KeyEvent.VK_UP:
 					////////
 					if(Game.MoverArriba()){
-						Verificaciones(Game);
+						Game.RandomNumero();
 					}
 					Game.MostrarMatriz();
 					Repaint(Game);
@@ -91,14 +92,14 @@ public class Pantalla {
 				case KeyEvent.VK_DOWN:
 					//////
 					if(Game.MoverAbajo()){
-						Verificaciones(Game);
+						Game.RandomNumero();
 					}
 					Game.MostrarMatriz();
 					Repaint(Game);
 					break;
 				case KeyEvent.VK_LEFT:
 					if(Game.MoverIzquierda()){
-						Verificaciones(Game);
+						Game.RandomNumero();
 					}
 					Game.MostrarMatriz();
 					Repaint(Game);
@@ -106,7 +107,7 @@ public class Pantalla {
 				case KeyEvent.VK_RIGHT:
 					//////
 					if(Game.MoverDerecha()){
-						Verificaciones(Game);
+						Game.RandomNumero();
 					}
 					Game.MostrarMatriz();
 					Repaint(Game);
@@ -127,13 +128,7 @@ public class Pantalla {
 
 	//////////////////// FIN JUEGO////////////////////////////////
 
-	private void Verificaciones(Tablero Game) {
-		if(Game.Gano == true)
-		{
-			System.out.println("Ganaste");
-		}
-		Game.RandomNumero();
-	}
+	
 
 	private void MostrarTablero(Tablero Game) {
 
@@ -434,7 +429,7 @@ public class Pantalla {
 		txtScore = new JEditorPane();
 		txtScore.setFocusable(false);
 		txtScore.setBackground(Color.ORANGE);
-		txtScore.setText("Score");
+		txtScore.setText("Puntos");
 		txtScore.setFont(new Font("Tahoma", Font.BOLD, 13));
 		txtScore.setEditable(false);
 		txtScore.setBounds(80, 12, 68, 26);
@@ -442,11 +437,11 @@ public class Pantalla {
 
 		JEditorPane dtrpnMove = new JEditorPane();
 		dtrpnMove.setFocusable(false);
-		dtrpnMove.setText("Move");
+		dtrpnMove.setText("Movimientos");
 		dtrpnMove.setFont(new Font("Tahoma", Font.BOLD, 13));
 		dtrpnMove.setEditable(false);
 		dtrpnMove.setBackground(Color.ORANGE);
-		dtrpnMove.setBounds(235, 13, 68, 26);
+		dtrpnMove.setBounds(235, 13, 87, 26);
 		frmThe.getContentPane().add(dtrpnMove);
 		
 		txtpnPerdiste = new JTextPane();
@@ -484,7 +479,17 @@ public class Pantalla {
 		label_14.setText(Game.toString(3, 3));
 		textField.setText(Game.toString(Game.Score));
 		textField_1.setText(Game.toString(Game.Movimiento));
-		perdis(!Game.HayMovimientos());
+		perdiste(!Game.HayMovimientos());
+		Ganaste(Game.Gano());
+		
+	
+		
+		
+		
+		
+		
+		
+		
 		
 		if (Game.get(0, 0) == 0) {
 			lblNewLabel.setVisible(false);
@@ -706,10 +711,15 @@ public class Pantalla {
 	public void setlabel_15(String text) {
 		label_15.setText(text);
 	}
-	public void perdis(Boolean termino){
+	public void perdiste(Boolean termino){
 		txtpnPerdiste.setVisible(termino);	
 	}
-	
+	public void Ganaste(Boolean gane){
+		if (gane == true){
+		txtpnPerdiste.setText("GANASTE !!!");
+		txtpnPerdiste.setVisible(true);}
+		
+	}
 
 	public JTextField getTextField() {
 		return textField;
