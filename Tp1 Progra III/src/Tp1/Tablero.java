@@ -262,14 +262,14 @@ public class Tablero {
 	}
 
 	public boolean HayMovimientos() {
-		for (int y = 0; y < tablero.length-1; y++) {
+		for (int y = 0; y < tablero.length; y++) {
 			for (int x = 0; x < tablero.length-1; x++) {
 				if (tablero[x][y] == tablero[x + 1][y]) {
 					return true;
 				}
 			}
 		}
-		for (int x = 0; x < tablero.length-1; x++) {
+		for (int x = 0; x < tablero.length; x++) {
 			for (int y = 0; y < tablero.length-1; y++) {
 				if (tablero[x][y] == tablero[x][y + 1]) {
 					return true;

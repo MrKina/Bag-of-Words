@@ -40,8 +40,8 @@ public class Pantalla {
 	private JLabel label_3;
 	private JLabel label;
 	private JLabel label_10;
-	private JTextPane txtpnPerdisteGil;
-	private JTextPane txtpnPerdisteGil2;
+	private JTextPane txtpnPerdiste;
+	
 
 	/**
 	 * Launch the application.
@@ -92,6 +92,7 @@ public class Pantalla {
 					break;
 				case KeyEvent.VK_DOWN:
 					//////
+					
 					Game.MoverAbajo();
 					Game.MostrarMatriz();
 					Verificaciones(Game);
@@ -131,12 +132,14 @@ public class Pantalla {
 	//////////////////// FIN JUEGO////////////////////////////////
 
 	private void Verificaciones(Tablero Game) {
-		if(Game.HayMovimientos()==false){
-			txtpnPerdisteGil2.setVisible(true);
-		}
+		/*if(Game.HayMovimientos()==false){
+			
+			System.out.println("Perdiste");
+			
+		}*/
 		if(Game.Gano == true)
 		{
-			
+			System.out.println("Ganaste");
 		}
 
 		Game.RandomNumero();
@@ -457,18 +460,20 @@ public class Pantalla {
 		dtrpnMove.setBounds(235, 13, 68, 26);
 		frmThe.getContentPane().add(dtrpnMove);
 		
-		txtpnPerdisteGil2 = new JTextPane();
-		txtpnPerdisteGil2.setSelectionColor(Color.RED);
+		txtpnPerdiste = new JTextPane();
+		txtpnPerdiste.setDisabledTextColor(Color.RED);
+		txtpnPerdiste.setVisible(false);
+		txtpnPerdiste.setSelectedTextColor(Color.RED);
+		txtpnPerdiste.setSelectionColor(Color.RED);
 		
-		txtpnPerdisteGil2.setForeground(Color.RED);
-		txtpnPerdisteGil2.setFont(new Font("Tahoma", Font.PLAIN, 34));
-		txtpnPerdisteGil2.setEnabled(false);
-		txtpnPerdisteGil2.setEditable(false);
-		txtpnPerdisteGil2.setBackground(Color.ORANGE);
-		txtpnPerdisteGil2.setText("PERDISTE GIL!");
-		txtpnPerdisteGil2.setVisible(false);
-		txtpnPerdisteGil2.setBounds(49, 365, 263, 46);
-		frmThe.getContentPane().add(txtpnPerdisteGil2);
+		txtpnPerdiste.setForeground(Color.RED);
+		txtpnPerdiste.setFont(new Font("Tahoma", Font.PLAIN, 34));
+		txtpnPerdiste.setEnabled(false);
+		txtpnPerdiste.setEditable(false);
+		txtpnPerdiste.setBackground(Color.ORANGE);
+		txtpnPerdiste.setText("PERDISTE !!!");
+		txtpnPerdiste.setBounds(59, 365, 263, 46);
+		frmThe.getContentPane().add(txtpnPerdiste);
 	}
 
 	private void Repaint(Tablero Game) {
@@ -490,7 +495,8 @@ public class Pantalla {
 		label_14.setText(Game.toString(3, 3));
 		textField.setText(Game.toString(Game.Score));
 		textField_1.setText(Game.toString(Game.Movimiento));
-
+		perdis(!Game.HayMovimientos());
+		
 		if (Game.get(0, 0) == 0) {
 			lblNewLabel.setVisible(false);
 		} else {
@@ -711,6 +717,10 @@ public class Pantalla {
 	public void setlabel_15(String text) {
 		label_15.setText(text);
 	}
+	public void perdis(Boolean termino){
+		txtpnPerdiste.setVisible(termino);	
+	}
+	
 
 	public JTextField getTextField() {
 		return textField;
