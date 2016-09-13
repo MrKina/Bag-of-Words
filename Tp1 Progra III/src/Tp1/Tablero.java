@@ -345,37 +345,46 @@ public class Tablero {
 	public Color SetColor (int Numero)
 	{
 		if (Numero == 2){
-			return Color.BLUE;
+			return Color.pink;
+	
 		}
 		if (Numero == 4){
-			return Color.CYAN;
+			return Color.getHSBColor(360, 900, 300);
+			
 		}
 		if (Numero == 8){
-			return Color.DARK_GRAY;
+			return Color.getHSBColor(215,75,92);
+			
+			
 		}
 		if (Numero == 16){
-			return Color.GRAY;
+			return Color.getHSBColor(480,800,300);
+			
+			
 		}
 		if (Numero == 32){
-			return Color.GREEN;
+			return Color.getHSBColor(480,700,300);
+			
 		}
 		if (Numero == 64){
-			return Color.MAGENTA;
+			return Color.getHSBColor(700,1,160);
+			
 		}
 		if (Numero == 128){
-			return Color.PINK;
-		}
-		if (Numero == 256){
 			return Color.RED;
 		}
+		if (Numero == 256){
+			return Color.MAGENTA;
+		}
 		if (Numero == 512){
-			return Color.yellow;
+			return Color.BLUE;
 		}
 		if (Numero == 1024){
-			return Color.YELLOW;
+			return Color.CYAN;
 		}
 		if (Numero == 2048){
-			return Color.ORANGE;
+			return Color.GREEN;
+			
 		}
 		return Color.BLACK;
 	}
