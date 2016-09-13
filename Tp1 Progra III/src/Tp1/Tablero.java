@@ -1,5 +1,6 @@
 package Tp1;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -55,9 +56,6 @@ public class Tablero {
 
 	public boolean MoverIzquierda() {
 		CopiarTablero();
-		MostrarMatriz();
-		System.out.println(" ------------- ");
-		MostrarMatrizCopiada();
 		ArrayList<Integer> Auxiliar = new ArrayList<Integer>();
 		for (int y = 0; y < tablero.length; y++) {
 			Auxiliar.clear();
@@ -90,11 +88,7 @@ public class Tablero {
 			AlinearIzquierda(y, Auxiliar);
 		}
 		
-		MostrarMatriz();
-		System.out.println(" ------------- ");
-		MostrarMatrizCopiada();
 		if (equalsTablero()) {
-			System.out.println("ES IGUAL");
 			return false;
 		}
 		Movimiento++;
@@ -146,7 +140,6 @@ public class Tablero {
 			AlinearDerecha(y, Auxiliar);
 		}
 		if (equalsTablero()) {
-			System.out.println("ES IGUAL");
 			return false;
 		}
 		Movimiento++;
@@ -199,7 +192,6 @@ public class Tablero {
 			AlinearArriba(x, Auxiliar);
 		}
 		if (equalsTablero()) {
-			System.out.println("ES IGUAL");
 			return false;
 		}
 		Movimiento++;
@@ -250,7 +242,6 @@ public class Tablero {
 			AlinearAbajo(x, Auxiliar);
 		}
 		if (equalsTablero()) {
-			System.out.println("ES IGUAL");
 			return false;
 		}
 		Movimiento++;
@@ -273,15 +264,6 @@ public class Tablero {
 		for (int y = 0; y < tablero.length; y++) {
 			for (int x = 0; x < tablero.length; x++) {
 				System.out.print(tablero[x][y] + " | ");
-			}
-			System.out.print("\n");
-		}
-	}
-
-	public void MostrarMatrizCopiada() {
-		for (int y = 0; y < Auxiliar.length; y++) {
-			for (int x = 0; x < Auxiliar.length; x++) {
-				System.out.print(Auxiliar[x][y] + " | ");
 			}
 			System.out.print("\n");
 		}
@@ -345,7 +327,6 @@ public class Tablero {
 				Auxiliar[x][y] = tablero[x][y];
 			}
 		}
-		System.out.println("COPIADO");
 	}
 
 	private boolean equalsTablero() {
@@ -360,4 +341,47 @@ public class Tablero {
 		return Prueba;
 
 	}
+	
+	public Color SetColor (int Numero)
+	{
+		if (Numero == 2){
+			return Color.BLUE;
+		}
+		if (Numero == 4){
+			return Color.CYAN;
+		}
+		if (Numero == 8){
+			return Color.DARK_GRAY;
+		}
+		if (Numero == 16){
+			return Color.GRAY;
+		}
+		if (Numero == 32){
+			return Color.GREEN;
+		}
+		if (Numero == 64){
+			return Color.MAGENTA;
+		}
+		if (Numero == 128){
+			return Color.PINK;
+		}
+		if (Numero == 256){
+			return Color.RED;
+		}
+		if (Numero == 512){
+			return Color.yellow;
+		}
+		if (Numero == 1024){
+			return Color.YELLOW;
+		}
+		if (Numero == 2048){
+			return Color.ORANGE;
+		}
+		return Color.BLACK;
+	}
+	
+	
+	
+	
+	
 }

@@ -16,6 +16,7 @@ import javax.swing.JEditorPane;
 import java.awt.Cursor;
 import javax.swing.JTextPane;
 import javax.swing.JSlider;
+import java.awt.FlowLayout;
 
 public class Pantalla {
 
@@ -41,8 +42,22 @@ public class Pantalla {
 	private JLabel label;
 	private JLabel label_10;
 	private JTextPane txtpnPerdiste;
+	private JPanel panel_16;
 	private JPanel panel;
-	
+	private JPanel panel_1;
+	private JPanel panel_2;
+	private JPanel panel_3;
+	private JPanel panel_4;
+	private JPanel panel_5;
+	private JPanel panel_6;
+	private JPanel panel_7;
+	private JPanel panel_8;
+	private JPanel panel_9;
+	private JPanel panel_10;
+	private JPanel panel_11;
+	private JPanel panel_12;
+	private JPanel panel_13;
+	private JPanel panel_14;
 
 	/**
 	 * Launch the application.
@@ -74,8 +89,13 @@ public class Pantalla {
 
 		Tablero Game = new Tablero();
 		Game.inicializarTablero();
-		
+
 		frmThe = new JFrame();
+		frmThe.getContentPane().setBackground(Color.ORANGE);
+		frmThe.getContentPane().setForeground(Color.WHITE);
+		frmThe.setTitle("2048 - The Game");
+		frmThe.setBounds(100, 100, 330, 438);
+		frmThe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmThe.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -83,44 +103,35 @@ public class Pantalla {
 				switch (keyCode) {
 				case KeyEvent.VK_UP:
 					////////
-					if(Game.MoverArriba()){
+					if (Game.MoverArriba()) {
 						Game.RandomNumero();
 					}
-					Game.MostrarMatriz();
 					Repaint(Game);
 					break;
 				case KeyEvent.VK_DOWN:
 					//////
-					if(Game.MoverAbajo()){
+					if (Game.MoverAbajo()) {
 						Game.RandomNumero();
 					}
-					Game.MostrarMatriz();
 					Repaint(Game);
 					break;
 				case KeyEvent.VK_LEFT:
-					if(Game.MoverIzquierda()){
+					if (Game.MoverIzquierda()) {
 						Game.RandomNumero();
 					}
-					Game.MostrarMatriz();
 					Repaint(Game);
 					break;
 				case KeyEvent.VK_RIGHT:
 					//////
-					if(Game.MoverDerecha()){
+					if (Game.MoverDerecha()) {
 						Game.RandomNumero();
 					}
-					Game.MostrarMatriz();
 					Repaint(Game);
 					break;
 
 				}
 			}
 		});
-		frmThe.getContentPane().setBackground(Color.ORANGE);
-		frmThe.getContentPane().setForeground(Color.WHITE);
-		frmThe.setTitle("2048 - The Game");
-		frmThe.setBounds(100, 100, 330, 438);
-		frmThe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		MostrarTablero(Game);
 
@@ -128,16 +139,14 @@ public class Pantalla {
 
 	//////////////////// FIN JUEGO////////////////////////////////
 
-	
-
 	private void MostrarTablero(Tablero Game) {
 
 		lblNewLabel = new JLabel(Game.toString(0, 0));
 		lblNewLabel.setBounds(10, 40, 68, 72);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 22));
-		lblNewLabel.setBackground(Color.WHITE);
+		lblNewLabel.setBackground(new Color(255, 255, 255));
 		if (Game.get(0, 0) == 0) {
 			lblNewLabel.setVisible(false);
 		}
@@ -308,103 +317,103 @@ public class Pantalla {
 		}
 		frmThe.getContentPane().add(label_14);
 
-		frmThe.getContentPane().setLayout(null);
+		panel_16 = new JPanel();
+		panel_16.setFocusable(false);
+		panel_16.setBounds(10, 40, 68, 72);
+		panel_16.setBackground(Game.SetColor(Game.get(0, 0)));
+		frmThe.getContentPane().add(panel_16);
 
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setFocusable(false);
-		panel.setBounds(10, 40, 68, 72);
-		panel.setBackground(Color.BLACK);
+		panel.setBounds(88, 40, 68, 72);
+		panel.setBackground(Game.SetColor(Game.get(1, 0)));
 		frmThe.getContentPane().add(panel);
 
-		JPanel panel_1 = new JPanel();
+		panel_1 = new JPanel();
 		panel_1.setFocusable(false);
-		panel_1.setBounds(88, 40, 68, 72);
-		panel_1.setBackground(Color.BLACK);
+		panel_1.setBounds(166, 40, 68, 72);
+		panel_1.setBackground(Game.SetColor(Game.get(2, 0)));
 		frmThe.getContentPane().add(panel_1);
 
-		JPanel panel_2 = new JPanel();
+		panel_2 = new JPanel();
 		panel_2.setFocusable(false);
-		panel_2.setBounds(166, 40, 68, 72);
-		panel_2.setBackground(Color.BLACK);
+		panel_2.setBounds(244, 40, 68, 72);
+		panel_2.setBackground(Game.SetColor(Game.get(3, 0)));
 		frmThe.getContentPane().add(panel_2);
 
-		JPanel panel_3 = new JPanel();
+		panel_3 = new JPanel();
 		panel_3.setFocusable(false);
-		panel_3.setBounds(244, 40, 68, 72);
-		panel_3.setBackground(Color.BLACK);
+		panel_3.setBounds(10, 123, 68, 72);
+		panel_3.setBackground(Game.SetColor(Game.get(0, 1)));
 		frmThe.getContentPane().add(panel_3);
 
-		JPanel panel_4 = new JPanel();
+		panel_4 = new JPanel();
 		panel_4.setFocusable(false);
-		panel_4.setBounds(10, 123, 68, 72);
-		panel_4.setBackground(Color.BLACK);
+		panel_4.setBounds(88, 123, 68, 72);
+		panel_4.setBackground(Game.SetColor(Game.get(1, 1)));
 		frmThe.getContentPane().add(panel_4);
 
-		JPanel panel_5 = new JPanel();
+		panel_5 = new JPanel();
 		panel_5.setFocusable(false);
-		panel_5.setBounds(88, 123, 68, 72);
-		panel_5.setBackground(Color.BLACK);
+		panel_5.setBounds(166, 123, 68, 72);
+		panel_5.setBackground(Game.SetColor(Game.get(2, 1)));
 		frmThe.getContentPane().add(panel_5);
 
-		JPanel panel_6 = new JPanel();
+		panel_6 = new JPanel();
 		panel_6.setFocusable(false);
-		panel_6.setBounds(166, 123, 68, 72);
-		panel_6.setBackground(Color.BLACK);
+		panel_6.setBounds(244, 123, 68, 72);
+		panel_6.setBackground(Game.SetColor(Game.get(3, 1)));
 		frmThe.getContentPane().add(panel_6);
 
-		JPanel panel_7 = new JPanel();
+		panel_7 = new JPanel();
 		panel_7.setFocusable(false);
-		panel_7.setBounds(244, 123, 68, 72);
-		panel_7.setBackground(Color.BLACK);
+		panel_7.setBounds(10, 206, 68, 72);
+		panel_7.setBackground(Game.SetColor(Game.get(0, 2)));
 		frmThe.getContentPane().add(panel_7);
 
-		JPanel panel_8 = new JPanel();
+		panel_8 = new JPanel();
 		panel_8.setFocusable(false);
-		panel_8.setBounds(10, 206, 68, 72);
-		panel_8.setBackground(Color.BLACK);
+		panel_8.setBounds(88, 206, 68, 72);
+		panel_8.setBackground(Game.SetColor(Game.get(1, 2)));
 		frmThe.getContentPane().add(panel_8);
 
-		JPanel panel_9 = new JPanel();
+		panel_9 = new JPanel();
 		panel_9.setFocusable(false);
-		panel_9.setBounds(88, 206, 68, 72);
-		panel_9.setBackground(Color.BLACK);
+		panel_9.setBounds(166, 206, 68, 72);
+		panel_9.setBackground(Game.SetColor(Game.get(2, 2)));
 		frmThe.getContentPane().add(panel_9);
 
-		JPanel panel_10 = new JPanel();
+		panel_10 = new JPanel();
 		panel_10.setFocusable(false);
-		panel_10.setBounds(166, 206, 68, 72);
-		panel_10.setBackground(Color.BLACK);
+		panel_10.setBounds(244, 206, 68, 72);
+		panel_10.setBackground(Game.SetColor(Game.get(3, 2)));
 		frmThe.getContentPane().add(panel_10);
 
-		JPanel panel_11 = new JPanel();
+		panel_11 = new JPanel();
 		panel_11.setFocusable(false);
-		panel_11.setBounds(244, 206, 68, 72);
-		panel_11.setBackground(Color.BLACK);
+		panel_11.setBounds(10, 289, 68, 72);
+		panel_11.setBackground(Game.SetColor(Game.get(0, 3)));
 		frmThe.getContentPane().add(panel_11);
 
-		JPanel panel_12 = new JPanel();
+		panel_12 = new JPanel();
 		panel_12.setFocusable(false);
-		panel_12.setBounds(10, 289, 68, 72);
-		panel_12.setBackground(Color.BLACK);
+		panel_12.setBounds(88, 289, 68, 72);
+		panel_12.setBackground(Game.SetColor(Game.get(1, 3)));
 		frmThe.getContentPane().add(panel_12);
 
-		JPanel panel_13 = new JPanel();
+		panel_13 = new JPanel();
 		panel_13.setFocusable(false);
-		panel_13.setBounds(88, 289, 68, 72);
-		panel_13.setBackground(Color.BLACK);
+		panel_13.setBounds(166, 289, 68, 72);
+		panel_13.setBackground(Game.SetColor(Game.get(2, 3)));
 		frmThe.getContentPane().add(panel_13);
 
-		JPanel panel_14 = new JPanel();
+		panel_14 = new JPanel();
 		panel_14.setFocusable(false);
-		panel_14.setBounds(166, 289, 68, 72);
-		panel_14.setBackground(Color.BLACK);
+		panel_14.setBounds(244, 289, 68, 72);
+		panel_14.setBackground(Game.SetColor(Game.get(3, 3)));
 		frmThe.getContentPane().add(panel_14);
-
-		JPanel panel_15 = new JPanel();
-		panel_15.setFocusable(false);
-		panel_15.setBounds(244, 289, 68, 72);
-		panel_15.setBackground(Color.BLACK);
-		frmThe.getContentPane().add(panel_15);
+		
+		frmThe.getContentPane().setLayout(null);
 
 		textField = new JTextField();
 		textField.setFocusable(false);
@@ -443,13 +452,13 @@ public class Pantalla {
 		dtrpnMove.setBackground(Color.ORANGE);
 		dtrpnMove.setBounds(235, 13, 87, 26);
 		frmThe.getContentPane().add(dtrpnMove);
-		
+
 		txtpnPerdiste = new JTextPane();
 		txtpnPerdiste.setDisabledTextColor(Color.RED);
 		txtpnPerdiste.setVisible(false);
 		txtpnPerdiste.setSelectedTextColor(Color.RED);
 		txtpnPerdiste.setSelectionColor(Color.RED);
-		
+
 		txtpnPerdiste.setForeground(Color.RED);
 		txtpnPerdiste.setFont(new Font("Tahoma", Font.PLAIN, 34));
 		txtpnPerdiste.setEnabled(false);
@@ -481,16 +490,24 @@ public class Pantalla {
 		textField_1.setText(Game.toString(Game.Movimiento));
 		perdiste(!Game.HayMovimientos());
 		Ganaste(Game.Gano());
-		
+
+		panel_16.setBackground(Game.SetColor(Game.get(0, 0)));
+		panel.setBackground(Game.SetColor(Game.get(1, 0)));
+		panel_1.setBackground(Game.SetColor(Game.get(2, 0)));
+		panel_2.setBackground(Game.SetColor(Game.get(3, 0)));
+		panel_3.setBackground(Game.SetColor(Game.get(0, 1)));
+		panel_4.setBackground(Game.SetColor(Game.get(1, 1)));
+		panel_5.setBackground(Game.SetColor(Game.get(2, 1)));
+		panel_6.setBackground(Game.SetColor(Game.get(3, 1)));
+		panel_7.setBackground(Game.SetColor(Game.get(0, 2)));
+		panel_8.setBackground(Game.SetColor(Game.get(1, 2)));
+		panel_9.setBackground(Game.SetColor(Game.get(2, 2)));
+		panel_10.setBackground(Game.SetColor(Game.get(3, 2)));
+		panel_11.setBackground(Game.SetColor(Game.get(0, 3)));
+		panel_12.setBackground(Game.SetColor(Game.get(1, 3)));
+		panel_13.setBackground(Game.SetColor(Game.get(2, 3)));
+		panel_14.setBackground(Game.SetColor(Game.get(3, 3)));
 	
-		
-		
-		
-		
-		
-		
-		
-		
 		if (Game.get(0, 0) == 0) {
 			lblNewLabel.setVisible(false);
 		} else {
@@ -711,14 +728,16 @@ public class Pantalla {
 	public void setlabel_15(String text) {
 		label_15.setText(text);
 	}
-	public void perdiste(Boolean termino){
-		txtpnPerdiste.setVisible(termino);	
+
+	public void perdiste(Boolean termino) {
+		txtpnPerdiste.setVisible(termino);
 	}
-	public void Ganaste(Boolean gane){
-		if (gane == true){
-		txtpnPerdiste.setText("GANASTE !!!");
-		txtpnPerdiste.setVisible(true);}
-		
+
+	public void Ganaste(Boolean gane) {
+		if (gane == true) {
+			txtpnPerdiste.setText("GANASTE !!!");
+			txtpnPerdiste.setVisible(true);
+		}
 	}
 
 	public JTextField getTextField() {
@@ -727,5 +746,95 @@ public class Pantalla {
 
 	public JTextField getTextField_1() {
 		return textField_1;
+	}
+	public Color getPanelBackground() {
+		return panel_16.getBackground();
+	}
+	public void setPanelBackground(Color background) {
+		panel_16.setBackground(background);
+	}
+	public Color getPanel_1Background() {
+		return panel.getBackground();
+	}
+	public void setPanel_1Background(Color background_1) {
+		panel.setBackground(background_1);
+	}
+	public Color getPanel_2Background() {
+		return panel_1.getBackground();
+	}
+	public void setPanel_2Background(Color background_2) {
+		panel_1.setBackground(background_2);
+	}
+	public Color getPanel_3Background() {
+		return panel_2.getBackground();
+	}
+	public void setPanel_3Background(Color background_3) {
+		panel_2.setBackground(background_3);
+	}
+	public Color getPanel_4Background() {
+		return panel_3.getBackground();
+	}
+	public void setPanel_4Background(Color background_4) {
+		panel_3.setBackground(background_4);
+	}
+	public Color getPanel_5Background() {
+		return panel_4.getBackground();
+	}
+	public void setPanel_5Background(Color background_5) {
+		panel_4.setBackground(background_5);
+	}
+	public Color getPanel_6Background() {
+		return panel_5.getBackground();
+	}
+	public void setPanel_6Background(Color background_6) {
+		panel_5.setBackground(background_6);
+	}
+	public Color getPanel_7Background() {
+		return panel_6.getBackground();
+	}
+	public void setPanel_7Background(Color background_7) {
+		panel_6.setBackground(background_7);
+	}
+	public JPanel getPanel_8() {
+		return panel_7;
+	}
+	public JPanel getPanel_9() {
+		return panel_8;
+	}
+	public Color getPanel_10Background() {
+		return panel_9.getBackground();
+	}
+	public void setPanel_10Background(Color background_8) {
+		panel_9.setBackground(background_8);
+	}
+	public Color getPanel_11Background() {
+		return panel_10.getBackground();
+	}
+	public void setPanel_11Background(Color background_9) {
+		panel_10.setBackground(background_9);
+	}
+	public Color getPanel_12Background() {
+		return panel_11.getBackground();
+	}
+	public void setPanel_12Background(Color background_10) {
+		panel_11.setBackground(background_10);
+	}
+	public Color getPanel_13Background() {
+		return panel_12.getBackground();
+	}
+	public void setPanel_13Background(Color background_11) {
+		panel_12.setBackground(background_11);
+	}
+	public Color getPanel_14Background() {
+		return panel_13.getBackground();
+	}
+	public void setPanel_14Background(Color background_12) {
+		panel_13.setBackground(background_12);
+	}
+	public Color getPanel_15Background() {
+		return panel_14.getBackground();
+	}
+	public void setPanel_15Background(Color background_13) {
+		panel_14.setBackground(background_13);
 	}
 }
